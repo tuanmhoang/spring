@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- define data beans: use for specific init -->
+    <bean id="eventData" class="com.tuanmhoang.spring.xml.data.EventData" init-method="init"></bean>
+    <bean id="userData" class="com.tuanmhoang.spring.xml.data.UserData" init-method="init"></bean>
+    <bean id="ticketData" class="com.tuanmhoang.spring.xml.data.TicketData" init-method="init"></bean>
+
+    <!-- define BeanPostProcessor beans: use for all init -->
+    <!--    <bean id="customBeanPostProcessor" class="com.tuanmhoang.spring.xml.config.CustomBeanPostProcessor"></bean>-->
+
+    <!-- define mapper beans -->
+    <bean id="eventMapper" class="com.tuanmhoang.spring.xml.mapper.impl.EventMapperImpl"></bean>
+    <bean id="ticketMapper" class="com.tuanmhoang.spring.xml.mapper.impl.TicketMapperImpl"></bean>
+    <bean id="userMapper" class="com.tuanmhoang.spring.xml.mapper.impl.UserMapperImpl"></bean>
+
+    <!-- define dao beans -->
+    <bean id="eventDao" class="com.tuanmhoang.spring.xml.dao.impl.EventDaoImpl">
+        <constructor-arg index="0" ref="eventData"/>
+        <constructor-arg index="1" ref="eventMapper"/>
+    </bean>
+    <bean id="ticketDao" class="com.tuanmhoang.spring.xml.dao.impl.TicketDaoImpl">
+        <constructor-arg index="0" ref="ticketData"/>
+        <constructor-arg index="1" ref="ticketMapper"/>
+    </bean>
+    <bean id="userDao" class="com.tuanmhoang.spring.xml.dao.impl.UserDaoImpl">
+        <constructor-arg index="0" ref="userData"/>
+        <constructor-arg index="1" ref="userMapper"/>
+    </bean>
+
+    <!-- define model beans -->
+    <bean id="event" class="com.tuanmhoang.spring.xml.model.impl.EventImpl"></bean>
+    <bean id="ticket" class="com.tuanmhoang.spring.xml.model.impl.TicketImpl"></bean>
+    <bean id="user" class="com.tuanmhoang.spring.xml.model.impl.UserImpl"></bean>
+
+    <!-- define service beans -->
+    <bean id="eventService" class="com.tuanmhoang.spring.xml.service.impl.EventServiceImpl">
+        <constructor-arg index="0" ref="eventDao"/>
+    </bean>
+    <bean id="ticketService" class="com.tuanmhoang.spring.xml.service.impl.TicketServiceImpl">
+        <constructor-arg index="0" ref="ticketDao"/>
+    </bean>
+    <bean id="userService" class="com.tuanmhoang.spring.xml.service.impl.UserServiceImpl">
+        <constructor-arg index="0" ref="userDao"/>
+    </bean>
+
+    <!-- define bookingFacade bean -->
+    <bean id="bookingFacade" class="com.tuanmhoang.spring.xml.facade.impl.BookingFacadeImpl">
+        <constructor-arg index="0" ref="eventService"/>
+        <constructor-arg index="1" ref="ticketService"/>
+        <constructor-arg index="2" ref="userService"/>
+    </bean>
+
+
+
+</beans>
