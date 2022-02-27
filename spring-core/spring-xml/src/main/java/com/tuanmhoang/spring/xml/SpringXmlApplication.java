@@ -1,17 +1,14 @@
 package com.tuanmhoang.spring.xml;
 
 import com.google.gson.Gson;
-import com.tuanmhoang.spring.xml.data.EventData;
 import com.tuanmhoang.spring.xml.facade.BookingFacade;
 import com.tuanmhoang.spring.xml.model.Event;
-import com.tuanmhoang.spring.xml.model.Ticket;
 import com.tuanmhoang.spring.xml.model.User;
 import com.tuanmhoang.spring.xml.model.impl.EventImpl;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Slf4j
@@ -20,8 +17,8 @@ public class SpringXmlApplication {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("beans/beans.xml");
         Event event = ctx.getBean(Event.class);
-        Ticket ticket = ctx.getBean(Ticket.class);
-        User user = ctx.getBean(User.class);
+//        Ticket ticket = ctx.getBean(Ticket.class);
+//        User user = ctx.getBean(User.class);
 
         BookingFacade bookingFacade = ctx.getBean(BookingFacade.class);
         Gson gson = new Gson();

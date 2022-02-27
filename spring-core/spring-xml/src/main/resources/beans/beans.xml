@@ -4,9 +4,9 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- define data beans: use for specific init -->
-    <bean id="eventData" class="com.tuanmhoang.spring.xml.data.EventData" init-method="init"></bean>
-    <bean id="userData" class="com.tuanmhoang.spring.xml.data.UserData" init-method="init"></bean>
-    <bean id="ticketData" class="com.tuanmhoang.spring.xml.data.TicketData" init-method="init"></bean>
+    <bean id="eventData" class="com.tuanmhoang.spring.xml.data.EventDataService" init-method="init"></bean>
+    <bean id="userData" class="com.tuanmhoang.spring.xml.data.UserDataService" init-method="init"></bean>
+    <bean id="ticketData" class="com.tuanmhoang.spring.xml.data.TicketDataService" init-method="init"></bean>
 
     <!-- define BeanPostProcessor beans: use for all init -->
     <!--    <bean id="customBeanPostProcessor" class="com.tuanmhoang.spring.xml.config.CustomBeanPostProcessor"></bean>-->

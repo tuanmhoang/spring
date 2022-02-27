@@ -1,6 +1,7 @@
 package com.tuanmhoang.spring.xml.mapper.impl;
 
 import com.tuanmhoang.spring.xml.entities.EventEntity;
+import com.tuanmhoang.spring.xml.entities.UserEntity;
 import com.tuanmhoang.spring.xml.mapper.EventMapper;
 import com.tuanmhoang.spring.xml.model.Event;
 import com.tuanmhoang.spring.xml.model.impl.EventImpl;

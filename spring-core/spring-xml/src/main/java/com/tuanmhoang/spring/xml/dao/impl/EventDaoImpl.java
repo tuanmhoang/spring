@@ -1,7 +1,7 @@
 package com.tuanmhoang.spring.xml.dao.impl;
 
 import com.tuanmhoang.spring.xml.dao.EventDao;
-import com.tuanmhoang.spring.xml.data.EventData;
+import com.tuanmhoang.spring.xml.data.EventDataService;
 import com.tuanmhoang.spring.xml.entities.EventEntity;
 import com.tuanmhoang.spring.xml.mapper.EventMapper;
 import com.tuanmhoang.spring.xml.model.Event;
@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 
 public class EventDaoImpl implements EventDao {
 
-    private EventData eventData;
+    private EventDataService eventData;
 
     private EventMapper eventMapper;
 
     public EventDaoImpl() {
     }
 
-    public EventDaoImpl(EventData eventData, EventMapper eventMapper) {
+    public EventDaoImpl(EventDataService eventData, EventMapper eventMapper) {
         this.eventData = eventData;
         this.eventMapper = eventMapper;
     }
 
     @Override
     public List<Event> getByTitle(String title, int pageSize, int pageNum) {
-        Map<Long, EventEntity> data = this.eventData.getEventData();
+        Map<Long, EventEntity> data = this.eventData.getData();
         return data.entrySet()
             .stream()
             .filter(e -> e.getValue().getTitle().equals(title))
@@ -39,7 +39,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public List<Event> getForDay(Date day, int pageSize, int pageNum) {
-        Map<Long, EventEntity> data = this.eventData.getEventData();
+        Map<Long, EventEntity> data = this.eventData.getData();
         return data.entrySet()
             .stream()
             .filter(e->e.getValue().getDate().equals(day))
@@ -49,7 +49,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event create(Event event) {
-        Map<Long, EventEntity> data = this.eventData.getEventData();
+        Map<Long, EventEntity> data = this.eventData.getData();
 
         Long newId = data.entrySet()
             .stream()
@@ -70,14 +70,14 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event update(Event event) {
-        Map<Long, EventEntity> data = this.eventData.getEventData();
+        Map<Long, EventEntity> data = this.eventData.getData();
         data.put(event.getId(),eventMapper.eventEntityFromEvent(event));
         return event;
     }
 
     @Override
     public boolean delete(long id) {
-        Map<Long, EventEntity> data = this.eventData.getEventData();
+        Map<Long, EventEntity> data = this.eventData.getData();
         if(data.containsKey(id)){
             data.remove(id);
             return true;
@@ -87,7 +87,7 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event getById(long id) {
-        final EventEntity eventEntity = eventData.getEventData().get(id);
+        final EventEntity eventEntity = eventData.getData().get(id);
         return eventMapper.eventFromEventEntity(eventEntity);
     }
 }

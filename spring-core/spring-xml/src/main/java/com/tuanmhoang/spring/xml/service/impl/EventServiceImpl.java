@@ -11,6 +11,9 @@ public class EventServiceImpl implements EventService {
 
     private EventDao eventDao;
 
+    public EventServiceImpl() {
+    }
+
     public EventServiceImpl(EventDao eventDao) {
         this.eventDao = eventDao;
     }

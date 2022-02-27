@@ -1,7 +1,7 @@
 package com.tuanmhoang.spring.xml.dao;
 
 import com.tuanmhoang.spring.xml.dao.impl.EventDaoImpl;
-import com.tuanmhoang.spring.xml.data.EventData;
+import com.tuanmhoang.spring.xml.data.EventDataService;
 import com.tuanmhoang.spring.xml.entities.EventEntity;
 import com.tuanmhoang.spring.xml.mapper.EventMapper;
 import com.tuanmhoang.spring.xml.mockdata.MockDataUtils;
@@ -30,7 +30,7 @@ public class EventDaoTest {
     private EventDao eventDao = new EventDaoImpl();
 
     @Mock
-    private EventData eventData;
+    private EventDataService eventData;
 
     @Mock
     private EventMapper eventMapper;
@@ -39,7 +39,7 @@ public class EventDaoTest {
 
     @BeforeEach
     public void init() {
-        mockData = MockDataUtils.mockEventData();
+        mockData = MockDataUtils.createMockEventData();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class EventDaoTest {
         final EventEntity foundEntity = mockData.get(1L);
         String expectedTitle = "Hackathon";
         Event expectedResult = new EventImpl(1L, expectedTitle, mockData.get(1L).getDate());
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
         when(eventMapper.eventFromEventEntity(nullable(EventEntity.class))).thenReturn(new EventImpl(
             foundEntity.getId(),
             foundEntity.getTitle(),
@@ -65,7 +65,7 @@ public class EventDaoTest {
         Date createdDate = new Date();
         Event eventToBeCreated = new EventImpl("Tech talk", createdDate);
 
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
 
         Event createdEvent = eventDao.create(eventToBeCreated);
 
@@ -78,7 +78,7 @@ public class EventDaoTest {
     @Test
     public void givenTitleToBeSearched_whenCallGetByTitle_thenShouldReturnCorrectly() {
         String searchedTitle = "Hackathon";
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
         when(eventMapper.eventFromEventEntity(nullable(EventEntity.class))).thenReturn(new EventImpl(
             1L,
             searchedTitle,
@@ -93,14 +93,14 @@ public class EventDaoTest {
     @Test
     public void givenIncorrectId_whenDeleteEvent_thenReturnFalse() {
         long idToDelete = 999L;
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
         assertFalse(eventDao.delete(idToDelete));
     }
 
     @Test
     public void givenCorrectId_whenDeleteEvent_thenReturnTrue() {
         long idToDelete = 1L;
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
         assertTrue(eventDao.delete(idToDelete));
         assertEquals(2, mockData.size());
         assertFalse(mockData.containsKey(1L));
@@ -109,7 +109,7 @@ public class EventDaoTest {
     @Test
     public void givenEventInfo_whenCallUpdate_thenDataShouldBeUpdated() {
 
-        when(eventData.getEventData()).thenReturn(mockData);
+        when(eventData.getData()).thenReturn(mockData);
         Event dataToUpdate = new EventImpl(1L, "Updated Title", mockData.get(1L).getDate());
 
         final Event updatedEvent = eventDao.update(dataToUpdate);

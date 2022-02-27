@@ -19,6 +19,9 @@ public class BookingFacadeImpl implements BookingFacade {
 
     private UserService userService;
 
+    public BookingFacadeImpl() {
+    }
+
     public BookingFacadeImpl(EventService eventService, TicketService ticketService, UserService userService) {
         this.eventService = eventService;
         this.ticketService = ticketService;
