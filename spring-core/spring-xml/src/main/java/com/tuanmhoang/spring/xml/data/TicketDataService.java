@@ -9,21 +9,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.util.ResourceUtils;
 
-@Getter
-@Setter
-@Slf4j
+//@Getter
+//@Setter
+//@Slf4j
 public class TicketDataService {
 
     private Map<Long, TicketEntity> ticketData = new HashMap<>();
+//    private static Logger log = LoggerFactory.getLogger(TicketDataService.class);
+
+    private static final Logger log = LogManager.getLogger(TicketDataService.class);
 
     public void init() throws FileNotFoundException {
+
 
         File fileData = ResourceUtils.getFile("classpath:data/ticket.json");
 
@@ -60,4 +63,13 @@ public class TicketDataService {
     private TicketEntity createTicketData(long id, long eventId, long userId, Category category, int place) {
         return new TicketEntity(id, eventId, userId, category, place);
     }
+
+    public Map<Long, TicketEntity> getTicketData() {
+        return ticketData;
+    }
+
+    public void setTicketData(Map<Long, TicketEntity> ticketData) {
+        this.ticketData = ticketData;
+    }
+
 }

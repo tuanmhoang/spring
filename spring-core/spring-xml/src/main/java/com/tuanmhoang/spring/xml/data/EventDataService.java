@@ -11,17 +11,20 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.parser.JSONParser;
 import org.springframework.util.ResourceUtils;
 
-@Getter
-@Setter
-@Slf4j
+//@Getter
+//@Setter
+//@Slf4j
 public class EventDataService {
     private Map<Long, EventEntity> data = new HashMap<>();
+
+//    private static Logger log = LoggerFactory.getLogger(EventDataService.class);
+
+    private static final Logger log = LogManager.getLogger(EventDataService.class);
 
     public void init() throws ParseException, FileNotFoundException {
 
@@ -57,6 +60,14 @@ public class EventDataService {
 
     private EventEntity createEvent(long id, String title, Date date) throws ParseException {
         return new EventEntity(id, title, date);
+    }
+
+    public Map<Long, EventEntity> getData() {
+        return data;
+    }
+
+    public void setData(Map<Long, EventEntity> data) {
+        this.data = data;
     }
 
 }

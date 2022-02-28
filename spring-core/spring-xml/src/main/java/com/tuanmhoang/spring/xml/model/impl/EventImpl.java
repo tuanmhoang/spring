@@ -2,10 +2,6 @@ package com.tuanmhoang.spring.xml.model.impl;
 
 import com.tuanmhoang.spring.xml.model.Event;
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 public class EventImpl implements Event {
 

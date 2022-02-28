@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- define data beans: use for specific init -->
     <bean id="eventData" class="com.tuanmhoang.spring.xml.data.EventDataService" init-method="init"></bean>
@@ -53,6 +56,53 @@
         <constructor-arg index="2" ref="userService"/>
     </bean>
 
+    <!-- log4j-->
+    <!--    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+    <!--        <property name="targetClass" value="org.springframework.util.Log4jConfigurer"/>-->
+    <!--        <property name="targetMethod" value="initLogging"/>-->
+    <!--        <property name="arguments">-->
+    <!--            <list>-->
+    <!--                <value>classpath:config/log4j.xml</value>-->
+    <!--            </list>-->
+    <!--        </property>-->
+    <!--    </bean>-->
 
+    <!-- log4j2-->
+<!--        <bean id="log4jConfigurer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+<!--            <property name="targetClass" value="org.apache.logging.log4j.LogManager"/>-->
+<!--            <property name="targetMethod" value="getContext"/>-->
+<!--            <property name="arguments">-->
+<!--                <list>-->
+<!--                    <value>false</value>-->
+<!--                </list>-->
+<!--            </property>-->
+<!--        </bean>-->
+    <!--    <bean id="log4jContext" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+    <!--        <property name="targetObject" ref="log4jConfigurer"/>-->
+    <!--        <property name="targetMethod" value="setConfigLocation"/>-->
+    <!--        <property name="arguments">-->
+    <!--            <list>-->
+    <!--                <value>classpath:config/log4j2.xml</value>-->
+    <!--            </list>-->
+    <!--        </property>-->
+    <!--    </bean>-->
 
+    <!-- log4j2 using p: namespace and util: namespace-->
+    <util:list id="arg-list-configurer" list-class="java.util.ArrayList">
+        <value>false</value>
+    </util:list>
+
+    <bean id="log4jConfigurer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"
+        p:targetClass="org.apache.logging.log4j.LogManager"
+        p:targetMethod="getContext"
+        p:arguments-ref="arg-list-configurer"/>
+
+    <util:list id="arg-list-log4jContext" list-class="java.util.ArrayList">
+        <value>classpath:config/log4j2.xml</value>
+    </util:list>
+
+    <bean id="log4jContext" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"
+        p:targetMethod="setConfigLocation"
+        p:targetObject-ref="log4jConfigurer"
+        p:arguments-ref="arg-list-log4jContext"/>
 </beans>

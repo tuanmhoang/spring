@@ -8,19 +8,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.util.ResourceUtils;
 
-@Getter
-@Setter
-@Slf4j
+//@Getter
+//@Setter
 public class UserDataService {
 
     private Map<Long, UserEntity> userData = new HashMap<>();
+
+//    private static Logger log = LoggerFactory.getLogger(UserDataService.class);
+
+    private static final Logger log = LogManager.getLogger(UserDataService.class);
 
     public void init() throws FileNotFoundException {
         File fileData = ResourceUtils.getFile("classpath:data/user.json");
@@ -51,6 +53,14 @@ public class UserDataService {
 
     private UserEntity createUserData(long id, String name, String email) {
         return new UserEntity(id, name, email);
+    }
+
+    public Map<Long, UserEntity> getUserData() {
+        return userData;
+    }
+
+    public void setUserData(Map<Long, UserEntity> userData) {
+        this.userData = userData;
     }
 
 }
