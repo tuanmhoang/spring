@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Tech talk",
+    "date": "2022-02-24"
+  },
+  {
+    "id": 2,
+    "title": "Hackathon",
+    "date": "2022-02-25"
+  },
+  {
+    "id": 3,
+    "title": "Knowledge sharing",
+    "date": "2022-02-26"
+  },
+  {
+    "id": 4,
+    "title": "Team building",
+    "date": "2022-02-27"
+  },
+  {
+    "id": 5,
+    "title": "Company trip",
+    "date": "2022-02-28"
+  }
+]
