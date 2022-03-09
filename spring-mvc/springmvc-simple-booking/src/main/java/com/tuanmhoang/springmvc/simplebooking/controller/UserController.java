@@ -17,12 +17,4 @@ public class UserController {
         log.info("Going to user page");
         return "user";
     }
-
-    @ModelAttribute("users")
-    public List<User> getDefaultUsers(){
-        List<User> users = new ArrayList<>();
-        users.add(new User(1L, "Alice", "alice@email.com"));
-        users.add(new User(2L, "Bob", "bob@email.com"));
-        return users;
-    }
 }
