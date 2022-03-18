@@ -1,10 +1,12 @@
 package com.tuanmhoang.springmvc.simplebooking.restcontroller;
 
+import com.tuanmhoang.springmvc.simplebooking.entity.Event;
 import com.tuanmhoang.springmvc.simplebooking.helper.PdfHelper;
 import com.tuanmhoang.springmvc.simplebooking.service.EventService;
 import com.tuanmhoang.springmvc.simplebooking.service.UserService;
 import java.io.ByteArrayInputStream;
 import java.io.OutputStream;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +23,17 @@ import com.itextpdf.text.DocumentException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("event")
 public class EventRestController {
 
     private final EventService eventService;
 
-    @GetMapping("/event/pdf")
+    @GetMapping("all")
+    public List<Event> getEvents(){
+        return eventService.findAll();
+    }
+
+    @GetMapping("pdf")
     public ResponseEntity<InputStreamResource> getPDF() throws Exception {
 
         var events = eventService.findAll();

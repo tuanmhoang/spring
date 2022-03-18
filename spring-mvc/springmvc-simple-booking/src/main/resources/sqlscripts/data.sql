@@ -25,19 +25,19 @@ VALUES
   ('Jack',  'jack@email.com');
 
 -- init ticket data
-INSERT INTO tbl_ticket
-  ( event_id, user_id, category, place )
-VALUES
-  (1, 1, 'STANDARD', 1),
-  (1, 2, 'PREMIUM', 3),
-  (1, 3, 'BAR', 2),
-  (2, 4, 'STANDARD', 1),
-  (2, 1, 'STANDARD', 2),
-  (3, 1, 'PREMIUM', 5),
-  (4, 1, 'STANDARD', 1),
-  (4, 1, 'STANDARD', 1),
-  (4, 10, 'PREMIUM', 1),
-  (5, 8, 'PREMIUM', 1),
-  (5, 4, 'PREMIUM', 5),
-  (5, 1, 'STANDARD', 4),
-  (5, 2, 'STANDARD', 3);
+--INSERT INTO tbl_ticket
+--  ( event_id, user_id, category, place )
+--VALUES
+--  (1, 1, 'STANDARD', 1),
+--  (1, 2, 'PREMIUM', 3),
+--  (1, 3, 'BAR', 2),
+--  (2, 4, 'STANDARD', 1),
+--  (2, 1, 'STANDARD', 2),
+--  (3, 1, 'PREMIUM', 5),
+--  (4, 1, 'STANDARD', 1),
+--  (4, 1, 'STANDARD', 1),
+--  (4, 10, 'PREMIUM', 1),
+--  (5, 8, 'PREMIUM', 1),
+--  (5, 4, 'PREMIUM', 5),
+--  (5, 1, 'STANDARD', 4),
+--  (5, 2, 'STANDARD', 3);
