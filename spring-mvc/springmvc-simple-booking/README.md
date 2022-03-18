@@ -211,3 +211,13 @@ Reference:
 Possibilities:
 - Check the library import
 - Mapping incorrectly. Refer: https://stackoverflow.com/questions/20410202/jaxb-unmarshalling-not-working-expected-elements-are-none
+
+---
+
+To setup MockMVC without using Springboot, refer to: https://stackoverflow.com/questions/43145408/use-mockmvc-outside-springboot-application
+
+Example: https://www.baeldung.com/integration-testing-in-spring
+
+To prevent `"Circular view path" exception with Spring MVC test`
+
+Refer: https://stackoverflow.com/questions/18813615/how-to-avoid-the-circular-view-path-exception-with-spring-mvc-test
